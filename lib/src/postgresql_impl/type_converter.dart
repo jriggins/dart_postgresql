@@ -277,7 +277,7 @@ class DefaultTypeConverter implements TypeConverter {
 
 
   final _timestampRegexp = new RegExp(
-      r'(\d{4,10})-(\d\d)-(\d\d) (\d\d):(\d\d):(\d\d)(\.(\d\d\d))?( BC)?');
+      r'(\d{4,10})-(\d\d)-(\d\d) (\d\d):(\d\d):(\d\d)(\.(\d+))?( BC)?');
 
   final _dateRegexp = new RegExp(r'^(\d{4,10})-(\d\d)-(\d\d)( BC)?$');
 
@@ -308,7 +308,7 @@ class DefaultTypeConverter implements TypeConverter {
       hour = int.parse(m[4]);
       minute = int.parse(m[5]);
       second = int.parse(m[6]);
-      millisecond = m[7] != null ? int.parse(m[8]) : 0;
+      millisecond = m[7] != null ? int.parse(m[8].padRight(3, '0')) : 0;
     }
 
     if ((isDateOnly && m[4] != null)
